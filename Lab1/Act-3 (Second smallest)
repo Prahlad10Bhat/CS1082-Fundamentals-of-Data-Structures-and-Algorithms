@@ -1,0 +1,10 @@
+arr={10,89,9,56,4,80,8}
+min=10
+twomin=10
+for num in arr:
+  if num<min:
+    twomin=min
+    min=num
+  elif num<twomin and num!=min:
+      twomin=num
+print("second smallest=",twomin)
