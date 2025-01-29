@@ -1,0 +1,10 @@
+arr={10,89,9,56,4,80,8}
+max=10
+twomax=10
+for num in arr:
+  if num>max:
+    twomax=max
+    max=num
+  elif num>twomax and num!=max:
+      twomax=num
+print("second largest=",twomax)
