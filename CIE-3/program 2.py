@@ -1,41 +1,56 @@
-class Node():
+
+class TreeNode():
     def __init__(self, data):
-        self.data= data
-        self.next= None 
-class Stack():
+        self.data = data  #the data storeed in node
+        self.left = None  #left child
+        self.right = None  #right child
+
+class BinaryTree:
     def __init__(self):
-        self.top = None 
+        self.root = None  #root of the binary tree
+#this is to insert data into binarytree
+    def insert(self, data):
+        new_node = TreeNode(data)  #creating a new node
+        if self.root is None:
+            self.root = new_node  #if the tree is empty the new node is root
+        else:
+            self._insert_recursive(self.root, new_node) #if its not empty the new node gets added in order recursive
 
-    def push(self, data):
-        new_node = Node(data)
-        new_node.next = self.top
-        self.top = new_node
+    def _insert_recursive(self, current_node, new_node):
+   
+        if new_node.data < current_node.data:  #if the data is less than the current node
+            if current_node.left is None:
+                current_node.left = new_node  #insert to the left
+            else:
+                self._insert_recursive(current_node.left, new_node)  #recur to the left
+        else:  #the data is greater or equal to current node
+            if current_node.right is None:
+                current_node.right = new_node  #insert to the right
+            else:
+                self._insert_recursive(current_node.right, new_node)  # recur to the right
+    def in_order_traversal(self):#this is to perform in order and to return traversal
+        result = []
+        self._in_order_recursive(self.root, result)
+        return result
 
-    def pop(self):
-        if self.empty():
-            print("Stack is empty!")
-            return None
-        popped_node = self.top 
-        self.top = self.top.next  
-        popped_node.next = None  
-        return popped_node.data
-    def peek(self):
-        if self.empty():
-            print("Stack is empty!")
-            return None
-        return self.top.data
-    def empty(self):
-        return self.top is None 
+    def _in_order_recursive(self, node, result):
+        if node:
+            self._in_order_recursive(node.left, result)  #traverse the left subtree
+            result.append(node.data)  #visit the node
+            self._in_order_recursive(node.right, result)  #traverse the right subtree
 
+#example below
 if __name__ == "__main__":
-    stack = Stack()
-    stack.push(10)
-    stack.push(20)
-    stack.push(30)
-    print("Peek:", stack.peek())
-    print("Pop:", stack.pop())  
-    print("Pop:", stack.pop())
-    print("Peek after pops:", stack.peek())
-    print("Is the stack empty?", stack.empty())
-    print("Pop:", stack.pop())
-    print("Is the stack empty now?", stack.empty())
+    tree = BinaryTree()
+   
+    #inserting data into the binary tree
+    tree.insert(10)
+    tree.insert(5)
+    tree.insert(15)
+    tree.insert(2)
+    tree.insert(7)
+    tree.insert(12)
+    tree.insert(20)
+   
+    #performing in-order traversal and printing the result
+    print("In-order traversal:", tree.in_order_traversal())
