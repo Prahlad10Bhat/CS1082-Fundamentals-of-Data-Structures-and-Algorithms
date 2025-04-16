@@ -1,11 +1,3 @@
-class Stack:
-    def empty():
-        if stack is empty:
-            return True
-        else:
-            return False
-
-
 class TreeNode:
     def __init__(self, data):
         self.data = data
