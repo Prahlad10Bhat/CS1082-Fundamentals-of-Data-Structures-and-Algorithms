@@ -1,36 +1,41 @@
-class TreeNode:
+class Node():
     def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
-
-class BinaryTree:
+        self.data= data
+        self.next= None 
+class Stack():
     def __init__(self):
-        self.root = None
+        self.top = None 
 
-    def in_order_traversal(self, node):
-        if node is not None:
-            self.in_order_traversal(node.left)
-            print(node.data, end=" ")
-            self.in_order_traversal(node.right)
+    def push(self, data):
+        new_node = Node(data)
+        new_node.next = self.top
+        self.top = new_node
 
-    def post_order_traversal(self, node):
-        if node is not None:
-            self.post_order_traversal(node.left)
-            self.post_order_traversal(node.right)
-            print(node.data, end=" ")
-    
-tree = BinaryTree()
-tree.root = TreeNode(1)
-tree.root.left = TreeNode(2)
-tree.root.right = TreeNode(3)
-tree.root.left.left = TreeNode(4)
-tree.root.left.right = TreeNode(5)
+    def pop(self):
+        if self.empty():
+            print("Stack is empty!")
+            return None
+        popped_node = self.top 
+        self.top = self.top.next  
+        popped_node.next = None  
+        return popped_node.data
+    def peek(self):
+        if self.empty():
+            print("Stack is empty!")
+            return None
+        return self.top.data
+    def empty(self):
+        return self.top is None 
 
-print("in order traversal:")
-tree.in_order_traversal(tree.root)
-print()  
-
-print("post order traversal:")
-tree.post_order_traversal(tree.root)
-print()  
+if __name__ == "__main__":
+    stack = Stack()
+    stack.push(10)
+    stack.push(20)
+    stack.push(30)
+    print("Peek:", stack.peek())
+    print("Pop:", stack.pop())  
+    print("Pop:", stack.pop())
+    print("Peek after pops:", stack.peek())
+    print("Is the stack empty?", stack.empty())
+    print("Pop:", stack.pop())
+    print("Is the stack empty now?", stack.empty())
