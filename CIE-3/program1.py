@@ -5,7 +5,10 @@ class Node:
 
 class Stack:
     def empty():
-    
+        if self top is None:
+            print("empty")
+        else:
+            print("not empty")
     def push():
 
     def pop():
